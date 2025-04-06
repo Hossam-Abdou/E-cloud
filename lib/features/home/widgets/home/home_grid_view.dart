@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eco_app/core/constants/app_styles.dart';
 import 'package:eco_app/features/bottom_nav_bar/view_model/bottom_bar_cubit.dart';
 import 'package:eco_app/features/home/view_model/home_cubit.dart';
-import 'package:eco_app/features/home/widgets/custom_shimmer.dart';
+import 'package:eco_app/features/home/widgets/home/custom_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,33 +19,7 @@ class HomeGridView extends StatelessWidget {
         var cubit = HomeCubit.get(context);
 
         if (state is CategoryLoadingState) {
-          return SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.32,
-            child: GridView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 6, // Fixed number of placeholders during loading
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    const CustomShimmer(), // Shimmer effect for the image
-                    SizedBox(height: 8.h),
-                    Container(
-                      width: 95.w,
-                      height: 16.h,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                    ), // Placeholder for the text
-                  ],
-                );
-              },
-            ),
-          );
+          return const CustomShimmer();
         }
 
         if (cubit.categoriesModel?.data == null || cubit.categoriesModel!.data!.isEmpty) {
@@ -76,10 +50,11 @@ class HomeGridView extends StatelessWidget {
 
                 children: [
 
-                  InkWell(
+                  GestureDetector(
                     onTap: (){
-                      // final bottomBarCubit = context.read<BottomBarCubit>();
-                      // bottomBarCubit.changeIndex(1);
+                      final bottomBarCubit = context.read<BottomBarCubit>();
+                      bottomBarCubit.changeIndex(1);
+
                     },
                     child: CachedNetworkImage(
                       height: 100.h,

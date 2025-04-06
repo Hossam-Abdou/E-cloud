@@ -2,7 +2,6 @@
 import 'package:eco_app/core/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 
 class BuildTextField extends StatefulWidget {
@@ -130,7 +129,7 @@ class _BuildTextFieldState extends State<BuildTextField> {
                       isSelected: !hidden,
                       color: widget.cursorColor,
                       selectedIcon: const Icon(Icons.remove_red_eye_rounded),
-                      icon: Icon(Icons.remove_red_eye_outlined),
+                      icon: const Icon(Icons.remove_red_eye_outlined),
                     )
                   : widget.suffixIcon,
               hintStyle: widget.hintTextStyle ??

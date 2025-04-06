@@ -1,7 +1,8 @@
 import 'package:eco_app/core/constants/app_assets.dart';
 import 'package:eco_app/core/constants/app_styles.dart';
 import 'package:eco_app/features/home/view_model/home_cubit.dart';
-import 'package:eco_app/features/home/widgets/custom_favourite_card.dart';
+import 'package:eco_app/features/home/widgets/favourite/custom_empty_favourites.dart';
+import 'package:eco_app/features/home/widgets/favourite/custom_favourite_card.dart';
 import 'package:eco_app/features/product/view_model/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,11 +13,30 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit()..getFavourites(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => HomeCubit()..getFavourites()),
+        BlocProvider(create: (context) => ProductCubit()),
+      ],
       child: BlocBuilder<HomeCubit, HomeState>(
+        // listener: (context, state) {
+        //   if (state is DeleteFromFavouritesSuccessState) {
+        //     ScaffoldMessenger.of(context).showSnackBar(
+        //       SnackBar(
+        //         content: Text(
+        //           'Removed from favorites',
+        //           style: AppStyles.medium18TextStyle(color: Colors.white),
+        //         ),
+        //         backgroundColor: AppColors.primaryColor,
+        //         duration: const Duration(seconds: 2),
+        //       ),
+        //     );
+        //
+        //   }
+        // },
         builder: (BuildContext context, state) {
           var favouriteCubit = HomeCubit.get(context);
+          var productCubit = ProductCubit.get(context);
 
           // Handle loading state
           if (state is FavouriteLoadingState) {
@@ -28,42 +48,7 @@ class FavouriteScreen extends StatelessWidget {
           // Handle empty state
           if (favouriteCubit.favouriteModel?.data == null ||
               favouriteCubit.favouriteModel!.data!.isEmpty) {
-            return Center(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      AppAssets.favouriteIcon,
-                      width: 120.w,
-                      height: 120.w,
-                      fit: BoxFit.contain,
-                      color: Colors.grey.shade300,
-                    ),
-                    SizedBox(height: 24.h),
-                    Text(
-                      'No Favorites Yet',
-                      style: AppStyles.medium18TextStyle(
-                        color: AppColors.textcolor,
-                        fontSize: 20.sp, // Slightly larger for emphasis
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 12.h),
-                    Text(
-                      'Tap the heart icon on products to save them here',
-                      style: AppStyles.regularSize12(
-                        color: Colors.grey,
-                        fontSize: 14.sp, // More readable
-                      ),
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                    ),
-                  ],
-                ),
-              ),
-            );
+            return const CustomEmptyFavourites();
           }
 
           return ListView.separated(
@@ -74,24 +59,24 @@ class FavouriteScreen extends StatelessWidget {
             itemCount: favouriteCubit.favouriteModel?.data?.length ?? 0,
             itemBuilder: (context, index) {
               return CustomFavouriteCard(
-                productName:
-                    favouriteCubit.favouriteModel?.data?[index].title ?? '',
-                removeFromFavourite: () {
-                  favouriteCubit.deleteFromFavourites(
-                   productId:  favouriteCubit.favouriteModel?.data?[index].id ?? ''
-                  );
-                },
-                currentPrice:
-                    favouriteCubit.favouriteModel?.data?[index].price ?? '',
-                imageUrl:
-                    favouriteCubit.favouriteModel?.data?[index].imageCover ??
-                        '',
-                onAddToCart: () {},
-                heartIcon: favouriteCubit.favouriteModel!.data!.any((item) =>
-                        item.sId == ProductCubit.get(context).productModel?.data?[index].id)
-                    ? AppAssets.favouriteIcon
-                    : AppAssets.addedToFavouriteIcon,
-              );
+                              productName: favouriteCubit.favouriteModel?.data?[index].title ?? '',
+                              removeFromFavourite: () {
+               favouriteCubit.deleteFromFavourites(
+                productId:  favouriteCubit.favouriteModel?.data?[index].id ?? ''
+               );
+                              },
+                              currentPrice: favouriteCubit.favouriteModel?.data?[index].price ?? '',
+                              imageUrl: favouriteCubit.favouriteModel?.data?[index].imageCover ?? '',
+                              onAddToCart: () {
+                                productCubit.addToCart(
+                                  productId: favouriteCubit.favouriteModel?.data?[index].id ?? '',
+                                );
+                              },
+                              heartIcon: favouriteCubit.favouriteModel!.data!.any((item) =>
+                     item.sId == productCubit.productModel?.data?[index].id)
+                 ? AppAssets.favouriteIcon
+                 : AppAssets.addedToFavouriteIcon,
+                            );
             },
           );
         },

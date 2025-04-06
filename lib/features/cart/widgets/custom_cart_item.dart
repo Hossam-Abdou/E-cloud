@@ -1,7 +1,6 @@
 import 'package:eco_app/core/constants/app_assets.dart';
 import 'package:eco_app/core/constants/app_styles.dart';
-import 'package:eco_app/features/home/view_model/home_cubit.dart';
-import 'package:eco_app/features/product/widgets/product_counter.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

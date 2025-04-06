@@ -15,45 +15,54 @@ class BottomBarScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = BottomBarCubit.get(context);
-        return Scaffold(
-          // appBar: const CustomAppBar(),
-          bottomNavigationBar: ClipRRect(
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(20.r),
-              topLeft: Radius.circular(20.r),
-            ),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
-              child: BottomNavigationBar(
-                backgroundColor: AppColors.primaryColor,
-                type: BottomNavigationBarType.fixed,
-                selectedItemColor: AppColors.primaryColor,
-                unselectedItemColor: AppColors.white,
-                showUnselectedLabels: true,
-                items: [
-                  CustomBottomBar(
-                    tittle: '',
-                    iconPath: AppAssets.homeIcon,
-                  ),
-                  CustomBottomBar(
-                    tittle: '',
-                    iconPath: AppAssets.categoryIcon,
-                  ),
-                  CustomBottomBar(
-                    tittle: '',
-                    iconPath: AppAssets.favouriteIcon,
-                  ),
-                  CustomBottomBar(
-                    tittle: '',
-                    iconPath: AppAssets.profileIcon,
-                  ),
-                ],
-                currentIndex: cubit.currentIndex,
-                onTap: (currentIndex) => cubit.changeIndex(currentIndex),
+        return PopScope(
+          canPop: cubit.currentIndex == 0, // Allow popping only if on the home screen
+          onPopInvoked: (didPop) {
+            if (!didPop && cubit.currentIndex != 0) {
+              // Navigate to the home screen by changing the index to 0
+              cubit.changeIndex(0);
+            }
+          },
+          child: Scaffold(
+            // appBar: const CustomAppBar(),
+            bottomNavigationBar: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20.r),
+                topLeft: Radius.circular(20.r),
+              ),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+                child: BottomNavigationBar(
+                  backgroundColor: AppColors.primaryColor,
+                  type: BottomNavigationBarType.fixed,
+                  selectedItemColor: AppColors.primaryColor,
+                  unselectedItemColor: AppColors.white,
+                  showUnselectedLabels: true,
+                  items: [
+                    CustomBottomBar(
+                      tittle: '',
+                      iconPath: AppAssets.homeIcon,
+                    ),
+                    CustomBottomBar(
+                      tittle: '',
+                      iconPath: AppAssets.categoryIcon,
+                    ),
+                    CustomBottomBar(
+                      tittle: '',
+                      iconPath: AppAssets.favouriteIcon,
+                    ),
+                    CustomBottomBar(
+                      tittle: '',
+                      iconPath: AppAssets.profileIcon,
+                    ),
+                  ],
+                  currentIndex: cubit.currentIndex,
+                  onTap: (currentIndex) => cubit.changeIndex(currentIndex),
+                ),
               ),
             ),
+            body: cubit.layouts[cubit.currentIndex],
           ),
-          body: cubit.layouts[cubit.currentIndex],
         );
       },
     );

@@ -1,6 +1,4 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:eco_app/core/api/api_manager.dart';
 import 'package:eco_app/core/api/end_points.dart';
 import 'package:eco_app/core/cache/secure_storage.dart';

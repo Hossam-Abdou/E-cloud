@@ -98,8 +98,7 @@ class CustomFavouriteCard extends StatelessWidget {
                             padding: EdgeInsets.symmetric(vertical: 10.h),
                           ),
                           child: Text('Add to Cart',
-                              style:
-                                  AppStyles.bold18TextStyle(fontSize: 14.sp)),
+                              style: AppStyles.bold18TextStyle(fontSize: 14.sp)),
                         ),
                       ),
                     ],

@@ -23,7 +23,7 @@ void main() async {
         create: (context) => AuthCubit(),
       ),
       BlocProvider<HomeCubit>(
-        create: (context) => HomeCubit()..getFavourites(),
+        create: (context) => HomeCubit(),
       ),
 
       BlocProvider<BottomBarCubit>(

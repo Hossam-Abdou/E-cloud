@@ -42,7 +42,7 @@ class Data {
   String? imageCover;
   Category? category;
   Category? brand;
-  double? ratingsAverage;
+  num? ratingsAverage;
   String? createdAt;
   String? updatedAt;
   int? iV;

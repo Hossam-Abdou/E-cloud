@@ -1,17 +1,16 @@
-import 'package:eco_app/config/routes_manager/routes.dart';
 import 'package:eco_app/core/constants/app_assets.dart';
 import 'package:eco_app/core/constants/app_styles.dart';
 import 'package:eco_app/core/utils/widgets/custom_button.dart';
 import 'package:eco_app/features/product/widgets/product_color.dart';
 import 'package:eco_app/features/product/widgets/product_counter.dart';
+import 'package:eco_app/features/product/widgets/product_details_app_bar.dart';
+import 'package:eco_app/features/product/widgets/product_details_image.dart';
 import 'package:eco_app/features/product/widgets/product_size.dart';
 import 'package:eco_app/features/product/view_model/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readmore/readmore.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 
 class ProductDetailsScreen extends StatelessWidget {
   final productId;
@@ -22,7 +21,8 @@ class ProductDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // debugPrint('the id is  $productId');
     return BlocProvider(
-      create: (context) => ProductCubit()..getAllProducts(productId.id.toString()),
+      create: (context) =>
+          ProductCubit()..getAllProducts(productId.id.toString()),
       child: BlocConsumer<ProductCubit, ProductState>(
         listener: (context, state) {
           if (state is ProductAddToCartSuccess) {
@@ -40,27 +40,8 @@ class ProductDetailsScreen extends StatelessWidget {
         },
         builder: (context, state) {
           var cubit = ProductCubit.get(context);
-PageController controller= PageController();
           return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                productId.title ?? '',
-                style: AppStyles.medium18TextStyle(color: AppColors.textcolor),
-              ),
-              centerTitle: true,
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, Routes.cartRoute);
-                  },
-                  icon: const ImageIcon(
-                    AssetImage(
-                      AppAssets.cartIcon,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            appBar: ProductDetailsAppBar(title: productId.title ?? ''),
             body: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 16.w,
@@ -69,77 +50,16 @@ PageController controller= PageController();
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Center(
-                    //   child: Image.network(
-                    //     productId.images[0],
-                    //     height: MediaQuery.sizeOf(context).height * 0.44,
-                    //     width: double.infinity,
-                    //     fit: BoxFit.cover,
-                    //   ),
-                    // ),
-                    Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.53,
-                          child: PageView.builder(
-                            controller: controller,
-                            itemCount: productId.images?.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: AppColors.strokcolor, ),
-                                  borderRadius: BorderRadius.circular(20.r),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20.r),
-                                  child: Image.network(
-                                    productId.images?[index] ?? '',
-                                    fit: BoxFit.cover,
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
 
-                        Padding(
-                          padding:  EdgeInsets.only(bottom: 8.h),
-                          child: SmoothPageIndicator(
-                            controller: controller,
-                            count: productId.images.length,
-                            axisDirection: Axis.horizontal,
-                            effect: CustomizableEffect(
-
-                                dotDecoration: DotDecoration(
-                                  height: 15.h,
-                                  width: 15.w,
-                                  dotBorder: const DotBorder(color: AppColors.primaryColor,),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                activeDotDecoration:DotDecoration(
-                                  height: 15.h,
-                                  width: 35.w,
-                                  dotBorder: const DotBorder(color: AppColors.primaryColor,),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  color: AppColors.primaryColor,
-                                ),
-
-                                // dotWidth: 24.0,
-                                // dotHeight: 16.0,
-                                // dotColor: Colors.white,
-                                // activeDotColor: AppColors.primaryColor,
-
-                            ),
-                          ),
-                        ),
-                      ],
+                    ProductDetailsImage(
+                      pageViewCount: productId.images?.length,
+                      indicatorCount: productId.images.length,
+                      productId: productId,
                     ),
                     SizedBox(
                       height: MediaQuery.sizeOf(context).height * 0.03,
                     ),
+                    // product title & price
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -161,6 +81,8 @@ PageController controller= PageController();
                     SizedBox(
                       height: MediaQuery.sizeOf(context).height * 0.03,
                     ),
+
+                    // sold and rate
                     Row(
                       children: [
                         Container(
@@ -178,9 +100,7 @@ PageController controller= PageController();
                             '${productId.sold} Sold',
                             overflow: TextOverflow.ellipsis,
                             style: AppStyles.medium18TextStyle(
-                              color: AppColors.textcolor,
-                              fontSize: 16.sp
-                            ),
+                                color: AppColors.textcolor, fontSize: 16.sp),
                           ),
                         ),
                         SizedBox(
@@ -215,6 +135,8 @@ PageController controller= PageController();
                     SizedBox(
                       height: 16.h,
                     ),
+
+                    //Description
                     Text(
                       'Description',
                       style: AppStyles.regularSize12(
@@ -227,8 +149,12 @@ PageController controller= PageController();
                       '${productId.description}',
                       style: AppStyles.medium18TextStyle(
                           color: AppColors.textcolor, fontSize: 14.sp),
-                      trimExpandedText: ' Read Less',lessStyle:AppStyles.medium18TextStyle(color: AppColors.strokcolor),
-                      trimCollapsedText: ' Read More',moreStyle: AppStyles.medium18TextStyle(color: AppColors.strokcolor),
+                      trimExpandedText: ' Read Less',
+                      lessStyle: AppStyles.medium18TextStyle(
+                          color: AppColors.strokcolor),
+                      trimCollapsedText: ' Read More',
+                      moreStyle: AppStyles.medium18TextStyle(
+                          color: AppColors.strokcolor),
                       trimLines: 3,
                       trimMode: TrimMode.Line,
                       colorClickableText: AppColors.textcolor.withOpacity(0.6),
@@ -236,12 +162,16 @@ PageController controller= PageController();
                     SizedBox(
                       height: 16.h,
                     ),
+
+                    // product Size
                     ProductSize(
                       onSelected: () {},
                     ),
                     SizedBox(
                       height: 16.h,
                     ),
+
+                    // product Color
                     Text(
                       'Color',
                       style: AppStyles.regularSize12(
@@ -263,7 +193,8 @@ PageController controller= PageController();
                               Text(
                                 'Total price',
                                 style: AppStyles.medium18TextStyle(
-                                  color: AppColors.primaryColor.withOpacity(0.6),
+                                  color:
+                                      AppColors.primaryColor.withOpacity(0.6),
                                 ),
                               ),
                               SizedBox(
@@ -286,22 +217,14 @@ PageController controller= PageController();
                               color: AppColors.primaryColor,
                               textColor: AppColors.white,
                               isAddToCartButton: true,
-                              onPressed: (){
-                                cubit.addToCart(productId: productId.id.toString());
+                              onPressed: () {
+                                cubit.addToCart(
+                                    productId: productId.id.toString());
                               },
                               buttonWidth: 1,
                             ),
                           ),
-                          // Expanded(
-                          //   child: CustomElevatedButton(
-                          //     label: 'Add to cart',
-                          //     onTap: () {},
-                          //     prefixIcon: Icon(
-                          //       Icons.add_shopping_cart_outlined,
-                          //       color: AppColors.white,
-                          //     ),
-                          //   ),
-                          // )
+
                         ],
                       ),
                     ),

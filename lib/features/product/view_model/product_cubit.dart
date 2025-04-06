@@ -1,13 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:eco_app/features/repo.dart';
-import 'package:meta/meta.dart';
+import 'package:eco_app/features/product/general_repo.dart';
 import 'package:eco_app/core/api/api_manager.dart';
 import 'package:eco_app/core/api/end_points.dart';
-import 'package:eco_app/core/cache/secure_storage.dart';
-import 'package:eco_app/features/cart/model/cart_model.dart';
+
 import 'package:eco_app/features/product/model/product_model.dart';
-import 'package:eco_app/features/home/model/category/sub_category_model.dart';
-import 'package:eco_app/features/home/model/category/categories_model.dart';
+
 import 'package:eco_app/features/home/model/favourite/favourite_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +26,7 @@ class ProductCubit extends Cubit<ProductState> {
   Future<void> addToCart({required String productId}) async {
     try {
       emit(ProductAddToCartLoading());
-      await generalRepo.addToCart(productId);
+      await generalRepo.addToCartRepo(productId);
       emit(ProductAddToCartSuccess());
     } catch (e) {
       emit(ProductAddToCartError());

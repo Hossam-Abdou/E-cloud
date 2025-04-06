@@ -9,8 +9,8 @@ class GeneralRepository {
   // Singleton instance
   static final GeneralRepository _instance = GeneralRepository._internal();
 
-  final ApiManager _api = ApiManager();
-  final SecureStorage _storage = SecureStorage();
+  final ApiManager api = ApiManager();
+  final SecureStorage storage = SecureStorage();
 
   // Private constructor
   GeneralRepository._internal();
@@ -18,10 +18,10 @@ class GeneralRepository {
   // Public factory constructor
   factory GeneralRepository() => _instance;
 
-  Future<void> addToCart(String productId) async {
-    final token = await _storage.storage.read(key: 'token');
+  Future<void> addToCartRepo(String productId) async {
+    final token = await storage.storage.read(key: 'token');
 
-    await _api.postData(
+    await api.postData(
       endPoint: EndPoints.cart,
       body: {'productId': productId},
       headers: {'token': token},
@@ -29,8 +29,8 @@ class GeneralRepository {
   }
 
   Future<void> deleteFromCart(String productId) async {
-    final token = await _storage.storage.read(key: 'token');
-    await _api.deleteData(
+    final token = await storage.storage.read(key: 'token');
+    await api.deleteData(
       endPoint: '${EndPoints.cart}/$productId',
       headers: {'token': token},
     );
@@ -39,10 +39,10 @@ class GeneralRepository {
 // favourite
 
   Future<FavouriteModel> getFavourites() async {
-    final token = await _storage.storage.read(key: 'token');
+    final token = await storage.storage.read(key: 'token');
     if (token == null) throw Exception('No authentication token found');
 
-    final response = await _api.getData(
+    final response = await api.getData(
       headers: {'token': token},
       endPoint: EndPoints.favourite,
     );
@@ -51,8 +51,8 @@ class GeneralRepository {
   }
 
   Future<void> addToFavourites(String productId) async {
-    final token = await _storage.storage.read(key: 'token');
-    await _api.postData(
+    final token = await storage.storage.read(key: 'token');
+    await api.postData(
       body: {'productId': productId},
       headers: {'token': token},
       endPoint: EndPoints.favourite,
@@ -60,8 +60,8 @@ class GeneralRepository {
   }
 
   Future<void> deleteFromFavourites(String productId) async {
-    final token = await _storage.storage.read(key: 'token');
-    await _api.deleteData(
+    final token = await storage.storage.read(key: 'token');
+    await api.deleteData(
       headers: {'token': token},
       endPoint: '${EndPoints.favourite}/$productId',
     );

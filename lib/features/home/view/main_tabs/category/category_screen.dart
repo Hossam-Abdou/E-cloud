@@ -1,10 +1,10 @@
 import 'package:eco_app/config/routes_manager/routes.dart';
 import 'package:eco_app/core/constants/app_styles.dart';
 import 'package:eco_app/features/home/view_model/home_cubit.dart';
+import 'package:eco_app/features/home/widgets/category/custom_category_list_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -44,47 +44,7 @@ class CategoryScreen extends StatelessWidget {
                       ),
                     ),
                     child: isLoading
-                        ? ListView.separated(
-                            shrinkWrap: true,
-                            itemCount: 15,
-                            separatorBuilder: (context, index) =>
-                                SizedBox(height: 10.h),
-                            itemBuilder: (context, index) {
-                              return Shimmer.fromColors(
-                                baseColor: Colors.grey[300]!,
-                                highlightColor: Colors.grey[100]!,
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 12.w),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.all(10.r),
-                                        width: 8.w,
-                                        height: 60.h,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(20.r),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          height: 20.h,
-                                          margin: EdgeInsets.only(right: 20.w),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(4.r),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          )
+                        ? const CustomCategoryListShimmer()
                         : ListView.separated(
                             shrinkWrap: true,
                             itemCount: cubit.categoriesModel?.data?.length ?? 0,
@@ -143,7 +103,6 @@ class CategoryScreen extends StatelessWidget {
                   ),
                 ),
 
-                // Right Subcategories Panel
                 Expanded(
                   flex: 2,
                   child: Container(

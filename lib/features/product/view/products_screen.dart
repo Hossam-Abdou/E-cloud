@@ -36,6 +36,19 @@ class ProductsScreen extends StatelessWidget {
                 ),
               );
             }
+            if (state is ProductDeleteFromFavouritesSuccessState) {
+              // Show a SnackBar to indicate success
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'Removed From favorites',
+                    style: AppStyles.medium18TextStyle(color: Colors.white),
+                  ),
+                  backgroundColor: AppColors.primaryColor.withOpacity(0.8),
+                  duration: const Duration(seconds: 1),
+                ),
+              );
+            }
             if (state is ProductAddToCartSuccess) {
               // Show a SnackBar to indicate success
               ScaffoldMessenger.of(context).showSnackBar(
@@ -125,10 +138,12 @@ class ProductsScreen extends StatelessWidget {
                     buttonColor: AppColors.primaryColor,
                     buttonIcon: Icons.add,
                     heartButtonOnTap: () {
+                      cubit.favouriteModel?.data?.any((item) =>
+                      item.sId == product.id) ==
+                          true?
+                      cubit.deleteFromFavourites(product.id ?? ''):
                       cubit.addToFavourites(productId: product.id ?? '');
-                      if (state is ProductAddToFavouriteSuccessState) {
 
-                      }
                     },
                     // heartIcon: AppAssets.favouriteIcon,
                     heartIcon: cubit.favouriteModel?.data?.any((item) =>
