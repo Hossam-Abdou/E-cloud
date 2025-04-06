@@ -1,0 +1,149 @@
+import 'package:eco_app/core/constants/app_assets.dart';
+import 'package:eco_app/core/constants/app_styles.dart';
+import 'package:eco_app/core/widgets/custom_button.dart';
+import 'package:eco_app/features/home/view_model/home_cubit.dart';
+import 'package:eco_app/features/home/widgets/custom_cart_item.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => HomeCubit()..getCart(),
+      child: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          var cubit = HomeCubit.get(context);
+
+          if (state is CartLoadingState) {
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.primaryColor,
+                ),
+              ),
+            );
+          }
+
+          // Show error message if there's an error
+          if (state is CartErrorState) {
+            return Scaffold(
+              body: Center(
+                child: Text(
+                  'Failed to load cart: ${state.error.toString()}',
+                  style: AppStyles.medium18TextStyle(color: Colors.red),
+                ),
+              ),
+            );
+          }
+
+          // Show empty cart message if cart is empty
+          if (cubit.cartModel?.data?.products == null ||
+              cubit.cartModel!.data!.products!.isEmpty) {
+            return Scaffold(
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      AppAssets.cartIcon,
+                    ),
+                    SizedBox(height: 20.h),
+                    Text(
+                      'Your cart is empty',
+                      style: AppStyles.medium18TextStyle(
+                        color: AppColors.textcolor,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(
+                      'Add some products to your cart',
+                      style: AppStyles.regularSize12(
+                          color: Colors.grey, fontSize: 14.sp),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+          return Scaffold(
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: cubit.cartModel?.data?.products?.length ?? 0,
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.02,
+                        ),
+                        itemBuilder: (context, index) {
+                          return CustomCartItem(
+                            removeFromCart: () {
+                              cubit.deleteFromCart(
+                                  productId: cubit.cartModel?.data
+                                          ?.products?[index].sId ??
+                                      '');
+                            },
+                            productName: cubit.cartModel?.data?.products?[index]
+                                    .product?.title ??
+                                '',
+                            currentPrice:
+                                cubit.cartModel?.data?.products?[index].price ??
+                                    '',
+                            quantity:
+                                cubit.cartModel?.data?.products?[index].count ??
+                                    0,
+                            imageUrl: cubit.cartModel?.data?.products?[index]
+                                    .product?.imageCover ??
+                                '',
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 30.h,top: 10.h),
+                      child: Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Total price',
+                                style: AppStyles.medium18TextStyle(
+                                    color: AppColors.textcolor),
+                              ),
+                              Text(
+                                cubit.cartModel?.data?.totalCartPrice
+                                        ?.toString() ??
+                                    '',
+                                style: AppStyles.medium18TextStyle(
+                                    color: AppColors.primaryColor),
+                              ),
+                            ],
+                          ),
+                          const Spacer(),
+                          const CustomButton(
+                            title: 'CheckOut',
+                            color: AppColors.primaryColor,
+                            textColor: AppColors.white,
+                            isCheckOutButton: true,
+                            buttonWidth: 0.6,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
