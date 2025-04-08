@@ -1,8 +1,8 @@
 
-import 'package:eco_app/features/home/view/main_tabs/category/category_screen.dart';
-import 'package:eco_app/features/home/view/main_tabs/favourite/favourite_screen.dart';
-import 'package:eco_app/features/home/view/main_tabs/home/home_screen.dart';
-import 'package:eco_app/features/home/view/main_tabs/profile/profile_screen.dart';
+import 'package:eco_app/features/main_tabs/view/category/category_screen.dart';
+import 'package:eco_app/features/main_tabs/view/favourite/favourite_screen.dart';
+import 'package:eco_app/features/main_tabs/view/home/home_screen.dart';
+import 'package:eco_app/features/main_tabs/view/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

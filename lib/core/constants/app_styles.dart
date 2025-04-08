@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color strokcolor = Color(0x4d004182);
+  static const Color secondaryColor = Color(0xffEDF1F5); // Light Blue
+  static const Color secondaryColor1 =Color(0xff66BB6A);// Yellow from AppColors
+  static const Color blueGray5001 =  Color(0XFFEDF1F3);
   static const Color textcolor = Color(0xff06004f);
   static const Color primaryColor = Color(0xff004182);
   static const Color descriptionColor = Color(0x9906004f);

@@ -1,9 +1,9 @@
 
 import 'package:eco_app/features/bottom_nav_bar/widgets/custom_app_bar.dart';
-import 'package:eco_app/features/home/view_model/home_cubit.dart';
-import 'package:eco_app/features/home/widgets/home/custom_row.dart';
-import 'package:eco_app/features/home/widgets/home/custom_slider.dart';
-import 'package:eco_app/features/home/widgets/home/home_grid_view.dart';
+import 'package:eco_app/features/main_tabs/view_model/home_cubit.dart';
+import 'package:eco_app/features/main_tabs/widgets/home/custom_row.dart';
+import 'package:eco_app/features/main_tabs/widgets/home/custom_slider.dart';
+import 'package:eco_app/features/main_tabs/widgets/home/home_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eco_app/core/constants/app_styles.dart';
 import 'package:eco_app/features/bottom_nav_bar/view_model/bottom_bar_cubit.dart';
-import 'package:eco_app/features/home/view_model/home_cubit.dart';
-import 'package:eco_app/features/home/widgets/home/custom_shimmer.dart';
+import 'package:eco_app/features/main_tabs/view_model/home_cubit.dart';
+import 'package:eco_app/features/main_tabs/widgets/home/custom_shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

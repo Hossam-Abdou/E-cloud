@@ -1,11 +1,10 @@
-import 'package:bloc/bloc.dart';
+import 'package:eco_app/features/main_tabs/model/favourite/favourite_model.dart';
 import 'package:eco_app/features/product/general_repo.dart';
 import 'package:eco_app/core/api/api_manager.dart';
 import 'package:eco_app/core/api/end_points.dart';
 
 import 'package:eco_app/features/product/model/product_model.dart';
 
-import 'package:eco_app/features/home/model/favourite/favourite_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'product_state.dart';

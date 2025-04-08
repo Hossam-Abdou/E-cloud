@@ -22,7 +22,7 @@ class ProductDetailsScreen extends StatelessWidget {
     // debugPrint('the id is  $productId');
     return BlocProvider(
       create: (context) =>
-          ProductCubit()..getAllProducts(productId.id.toString()),
+          ProductCubit(),
       child: BlocConsumer<ProductCubit, ProductState>(
         listener: (context, state) {
           if (state is ProductAddToCartSuccess) {
@@ -139,7 +139,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     //Description
                     Text(
                       'Description',
-                      style: AppStyles.regularSize12(
+                      style: AppStyles.medium18TextStyle(
                           color: AppColors.textcolor, fontSize: 18.sp),
                     ),
                     SizedBox(
@@ -147,7 +147,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                     ReadMoreText(
                       '${productId.description}',
-                      style: AppStyles.medium18TextStyle(
+                      style: AppStyles.regularSize12(
                           color: AppColors.textcolor, fontSize: 14.sp),
                       trimExpandedText: ' Read Less',
                       lessStyle: AppStyles.medium18TextStyle(

@@ -2,7 +2,7 @@ import 'package:eco_app/core/constants/app_assets.dart';
 import 'package:eco_app/core/constants/app_styles.dart';
 import 'package:eco_app/core/utils/widgets/custom_button.dart';
 import 'package:eco_app/features/cart/view_model/cart_cubit.dart';
-import 'package:eco_app/features/home/view_model/home_cubit.dart';
+import 'package:eco_app/features/main_tabs/view_model/home_cubit.dart';
 import 'package:eco_app/features/cart/widgets/custom_cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

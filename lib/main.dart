@@ -5,7 +5,7 @@ import 'package:eco_app/core/cache/shared_pref.dart';
 import 'package:eco_app/core/utils/observer.dart';
 import 'package:eco_app/features/auth/view_model/auth_cubit.dart';
 import 'package:eco_app/features/bottom_nav_bar/view_model/bottom_bar_cubit.dart';
-import 'package:eco_app/features/home/view_model/home_cubit.dart';
+import 'package:eco_app/features/main_tabs/view_model/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

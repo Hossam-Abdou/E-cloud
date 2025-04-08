@@ -126,6 +126,9 @@ class ProductsScreen extends StatelessWidget {
                         ? product.images!.first
                         : '', // Select the first image
                     onPressed: () {
+
+
+
                       Navigator.pushNamed(
                         context,
                         Routes.productDetails,

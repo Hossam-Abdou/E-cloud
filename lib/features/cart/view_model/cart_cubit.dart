@@ -1,3 +1,4 @@
+import 'package:eco_app/features/product/general_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:eco_app/core/api/api_manager.dart';
 import 'package:eco_app/core/api/end_points.dart';
@@ -10,6 +11,7 @@ class CartCubit extends Cubit<CartState> {
   CartCubit() : super(CartInitial());
 
   static CartCubit get(context) => BlocProvider.of(context);
+  final GeneralRepository generalRepo = GeneralRepository();
 
   CartModel? cartModel;
 
@@ -61,19 +63,14 @@ class CartCubit extends Cubit<CartState> {
   }
 
 
-  int counter  = 1;
-
-
-  decrementCounter() {
-    if (counter > 1) {
-      counter--;
-    }
-    emit(DecrementCounterState());
+  void decrement() {
+    generalRepo.decrement();
+    emit(CounterDecremented(generalRepo.counter));
   }
 
-  incrementCounter() {
-    counter++;
-    emit(IncrementCounterState());
+  void increment() {
+    generalRepo.increment();
+    emit(CounterIncremented(generalRepo.counter));
   }
 
   // addToCart({required String productId})async {

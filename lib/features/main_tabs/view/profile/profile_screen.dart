@@ -1,7 +1,7 @@
 import 'package:eco_app/config/routes_manager/routes.dart';
 import 'package:eco_app/core/constants/app_styles.dart';
 import 'package:eco_app/features/auth/view_model/auth_cubit.dart';
-import 'package:eco_app/features/home/view/main_tabs/profile/main_text_field.dart';
+import 'package:eco_app/features/main_tabs/view/profile/main_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -105,7 +105,7 @@ class ProfileScreen extends StatelessWidget {
                 style: AppStyles.medium18TextStyle(color: AppColors.black, fontSize: 16),
               ),
               const BuildTextField(
-                hint: 'Mohandseen',
+                hint: 'Giza',
                 borderBackgroundColor: AppColors.strokcolor,
                 backgroundColor: AppColors.transparent,
                 suffixIcon: Icon(

@@ -39,11 +39,11 @@ dependencies:
   bloc:
   flutter_bloc: ^9.0.0
   flutter_screenutil:
-  flutter_svg: ^2.0.17
-  loader_overlay: ^4.0.2
+#  flutter_svg: ^2.0.17
+#  loader_overlay: ^4.0.2
   dartz: ^0.10.1
   shared_preferences: ^2.3.2
-  connectivity_plus: ^6.0.5
+#  connectivity_plus: ^6.0.5
   pretty_dio_logger: ^1.4.0
   flutter_secure_storage:
   conditional_builder_null_safety: ^0.0.6
@@ -52,6 +52,7 @@ dependencies:
   smooth_page_indicator: ^1.2.1
   readmore: ^3.0.0
 
+page_transition: ^2.2.1
 
 dev_dependencies:
   flutter_test:
@@ -85,10 +86,10 @@ flutter:
 #    - lib/auth/model/
 #    - lib/auth/view_model/
 #    - lib/core/
-#    - lib/home/
-#    - lib/home/view/
-#    - lib/home/model/
-#    - lib/home/view_model/
+#    - lib/main_tabs/
+#    - lib/main_tabs/view/
+#    - lib/main_tabs/model/
+#    - lib/main_tabs/view_model/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

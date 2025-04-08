@@ -124,7 +124,7 @@ class CustomProductItem extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 4),
-                      Icon(Icons.star, color: Colors.amber, size: 24.sp),
+                      Icon(Icons.star, color: Colors.amber, size: 20.sp),
                       const Spacer(),
                       InkWell(
                         onTap: onAddToCart,
@@ -134,7 +134,7 @@ class CustomProductItem extends StatelessWidget {
                           child: Icon(
                             buttonIcon,
                             color: Colors.white,
-                            size: 36,
+                            size: 32,
                           ),
                         ),
                       ),

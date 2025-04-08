@@ -8,25 +8,30 @@ class CreateAccountText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Align(
+    return Align(
       alignment: Alignment.center,
       child: RichText(
-          text: TextSpan(children: [
+        text: TextSpan(
+          children: [
             TextSpan(
               text: 'Don\'t have an account? ',
-              style: AppStyles.font300Size18(),
+              style: AppStyles.font300Size18(
+                color: Colors.grey.shade800,
+              ),
             ),
             TextSpan(
-              recognizer: TapGestureRecognizer()..onTap = () {
-                Navigator.pushNamed(context, Routes.signUpRoute);
-              },
-
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.pushNamed(context, Routes.signUpRoute);
+                },
               text: 'Create Account',
               style: AppStyles.semiBold20TextStyle(
                 color: AppColors.white,
               ),
             ),
-          ])),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,10 +1,13 @@
 import 'package:eco_app/config/routes_manager/routes.dart';
+import 'package:eco_app/core/constants/app_assets.dart';
 import 'package:eco_app/core/constants/app_styles.dart';
-import 'package:eco_app/features/home/view_model/home_cubit.dart';
-import 'package:eco_app/features/home/widgets/category/custom_category_list_shimmer.dart';
+import 'package:eco_app/features/main_tabs/widgets/category/custom_category_list_shimmer.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../view_model/home_cubit.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -110,7 +113,7 @@ class CategoryScreen extends StatelessWidget {
                     child: isSubLoading
                         ? const Center(
                             child: CircularProgressIndicator(
-                                color: AppColors.primaryColor))
+                                color: AppColors.primaryColor,),)
                         : (cubit.subCategoryModel?.data?.isNotEmpty ?? false)
                             ? Column(
                                 children: [
@@ -150,19 +153,16 @@ class CategoryScreen extends StatelessWidget {
                                                   );
                                                 },
                                                 child: Container(
-                                                  height: 90.h,
+                                                  height: 110.h,
+
                                                   decoration: BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.r),
-                                                    image: DecorationImage(
-                                                      image: NetworkImage(
-                                                        cubit
-                                                                .categoriesModel
-                                                                ?.data?[index]
-                                                                .image ??
-                                                            '',
+                                                    image: const DecorationImage(
+                                                      image: AssetImage(
+                                                       AppAssets.subCategoryCard,
                                                       ),
                                                       fit: BoxFit.cover,
                                                     ),

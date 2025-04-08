@@ -16,10 +16,10 @@ class BottomBarScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = BottomBarCubit.get(context);
         return PopScope(
-          canPop: cubit.currentIndex == 0, // Allow popping only if on the home screen
+          canPop: cubit.currentIndex == 0, // Allow popping only if on the main_tabs screen
           onPopInvoked: (didPop) {
             if (!didPop && cubit.currentIndex != 0) {
-              // Navigate to the home screen by changing the index to 0
+              // Navigate to the main_tabs screen by changing the index to 0
               cubit.changeIndex(0);
             }
           },

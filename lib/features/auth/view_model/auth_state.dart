@@ -4,6 +4,7 @@ abstract class AuthState {}
 
 final class AuthInitial extends AuthState {}
 final class ChangeVisibilityState extends AuthState {}
+final class ChangeConfirmPasswordVisibilityState extends AuthState {}
 
 final class LoginLoadingState extends AuthState {}
 final class LoginSuccessState extends AuthState {}

@@ -1,7 +1,7 @@
 class AppAssets{
-  static const String logo = 'assets/images/logo.png';
+  static const String logo = 'assets/images/logo-transparent.png';
 
-  // home icons
+  // main_tabs icons
   static const String homeIcon = 'assets/images/ic_home.png';
   static const String favouriteIcon = 'assets/images/ic_wish_list.png';
   static const String categoryIcon = 'assets/images/ic_category.png';
@@ -15,6 +15,7 @@ class AppAssets{
   static const String secondSlider = 'assets/images/CarouselSlider2.png';
   static const String thirdSlider = 'assets/images/CarouselSlider3.png';
   static const String deleteIcon = 'assets/images/ic_delete.png';
+  static const String subCategoryCard = 'assets/images/category_card_image.png';
 
 
 }

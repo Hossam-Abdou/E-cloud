@@ -34,99 +34,134 @@ class LoginScreen extends StatelessWidget {
       builder: (context, state) {
         var cubit = AuthCubit.get(context);
         return Scaffold(
-          backgroundColor: AppColors.primaryColor,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            automaticallyImplyLeading: false,
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: SingleChildScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
+          // appBar: AppBar(
+          //   backgroundColor: Colors.transparent,
+          //   automaticallyImplyLeading: false,
+          // ),
+          body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.primaryColor.withOpacity(0.1),
+                  AppColors.secondaryColor,
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
                       child: Image.asset(
-                    AppAssets.logo,
-                    height: 85.h,
-                  )),
-                  SizedBox(
-                    height: 50.h,
-                  ),
-                  Text(
-                    'Welcome Back To Route',
-                    style: AppStyles.semiBold24TextStyle(),
-                  ),
-                  Text(
-                    'Please sign in with your mail',
-                    style: AppStyles.font300Size18(),
-                  ),
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  Text(
-                    'E-mail',
-                    style: AppStyles.medium18TextStyle(),
-                  ),
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                  CustomTextField(
-                    hintText: 'enter your email',
-                    controller: cubit.emailController,
-                  ),
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                  Text(
-                    'Password',
-                    style: AppStyles.medium18TextStyle(),
-                  ),
-                  SizedBox(
-                    height: 24.h,
-                  ),
-                  CustomTextField(
-                    hintText: 'enter your password',
-                    controller: cubit.passwordController,
-                    isPassword: cubit.isVisible,
-                    suffixIcon: cubit.isVisible
-                        ? Icons.visibility
-                        : Icons.visibility_off_sharp,
-                    suffixIconOnPress: () {
-                      cubit.changeVisibility();
-                    },
-                  ),
-                  Align(
-                    alignment: FractionalOffset.centerRight,
-                    child: TextButton(
-                        onPressed: () {},
+                       AppAssets.logo,
+                        height: 240.h,
+                        width: 240.h,
+                      ),
+                    ),
+                    SizedBox(height: 32.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: SizedBox(
+                        width: MediaQuery
+                            .sizeOf(context)
+                            .width * 0.47,
                         child: Text(
-                          'Forgot Password?',
-                          style: AppStyles.font300Size18(),
-                        )),
-                  ),
-                  SizedBox(
-                    height: 40.h,
-                  ),
-                  ConditionalBuilder(
-                    condition: state is! LoginLoadingState,
-                    fallback: (context) => const Center(
-                        child: CircularProgressIndicator(
-                      color: AppColors.yellowColor,
-                    )),
-                    builder: (context) => CustomButton(
-                      title: 'Login',
-                      onPressed: () {
-                        cubit.login();
+                          "Sign in to your Account",
+                          maxLines: 2,
+                          style: TextStyle(
+                            fontSize: 28.sp, fontWeight: FontWeight.bold,
+                          ),
+
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Enter your email and password to log in ",
+                        style: AppStyles.medium18TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 32.h),
+                    Text(
+                      'E-mail',
+                      style: AppStyles.medium18TextStyle(
+                          color: AppColors.primaryColor
+                      ),
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    CustomTextField(
+                      hintText: 'enter your email',
+                      controller: cubit.emailController,
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    Text(
+                      'Password',
+                      style: AppStyles.medium18TextStyle(
+                          color: AppColors.primaryColor
+
+                      ),
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    CustomTextField(
+                      hintText: 'enter your password',
+                      controller: cubit.passwordController,
+                      isPassword: cubit.isVisible,
+                      suffixIcon: cubit.isVisible
+                          ? Icons.visibility_off_sharp
+                          : Icons.visibility,
+                      suffixIconOnPress: () {
+                        cubit.changeVisibility();
                       },
                     ),
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  const CreateAccountText(),
-                ],
+                    Align(
+                      alignment: FractionalOffset.centerRight,
+                      child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Forgot Password?',
+                            style: AppStyles.font300Size18(
+                              color: Colors.grey.shade800,
+                            ),
+                          )),
+                    ),
+                    SizedBox(
+                      height: 40.h,
+                    ),
+                    ConditionalBuilder(
+                      condition: state is! LoginLoadingState,
+                      fallback: (context) => const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.yellowColor,
+                          )),
+                      builder: (context) => CustomButton(
+                        title: 'Login',
+                        onPressed: () {
+                          cubit.login();
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    const CreateAccountText(),
+                  ],
+                ),
               ),
             ),
           ),

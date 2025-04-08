@@ -19,11 +19,17 @@ class AuthCubit extends Cubit<AuthState> {
   TextEditingController confirmPasswordController = TextEditingController();
 
 
-  bool isVisible = false;
+  bool isVisible = true;
+  bool isConfirmPasswordVisible = true;
 
   void changeVisibility() {
     isVisible = !isVisible;
     emit(ChangeVisibilityState());
+  }
+
+  void changeConfirmPasswordVisibility() {
+    isConfirmPasswordVisible = !isConfirmPasswordVisible;
+    emit(ChangeConfirmPasswordVisibilityState());
   }
 
   login() async {
@@ -56,7 +62,7 @@ class AuthCubit extends Cubit<AuthState> {
       } else {
         debugPrint('Unexpected Dio error: ${error.toString()}');
       }
-      emit(LoginErrorState(error.toString()));
+      emit(LoginErrorState(error.response?.data['message']));
     } catch (error) {
       // Catch any other unexpected errors
       debugPrint('Unexpected error: $error');

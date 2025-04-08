@@ -3,7 +3,7 @@ import 'package:eco_app/features/auth/view/login_screen.dart';
 import 'package:eco_app/features/auth/view/register_screen.dart';
 import 'package:eco_app/features/bottom_nav_bar/view/bottom_bar_screen.dart';
 import 'package:eco_app/features/cart/view/cart_screen.dart';
-import 'package:eco_app/features/home/view/main_tabs/home/home_screen.dart';
+import 'package:eco_app/features/main_tabs/view/home/home_screen.dart';
 import 'package:eco_app/features/product/view/product_details_screen.dart';
 import 'package:eco_app/features/product/view/products_screen.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +27,20 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const CartScreen());
       case Routes.productsScreenRoute:
         return MaterialPageRoute(builder: (_) => ProductsScreen(settings.arguments as String));
-      case Routes.productDetails:
-        return MaterialPageRoute(builder: (_) => ProductDetailsScreen(settings.arguments));
+      // case Routes.productDetails:
+      //   return MaterialPageRoute(builder: (_) => ProductDetailsScreen(settings.arguments));
+
+        case Routes.productDetails:
+        return PageRouteBuilder(
+          // settings:settings ,
+          transitionDuration: const Duration(milliseconds: 400),
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return FadeTransition(
+              opacity: animation,
+              child: ProductDetailsScreen(settings.arguments),
+            );
+          },
+        );
 
       default:
         return unDefinedRoute();

@@ -8,7 +8,7 @@ final int pageViewCount;
 final int indicatorCount;
 final productId;
 
-ProductDetailsImage({required this.pageViewCount,required this.indicatorCount,this.productId});
+const ProductDetailsImage({super.key, required this.pageViewCount,required this.indicatorCount,this.productId});
 
 @override
   Widget build(BuildContext context) {

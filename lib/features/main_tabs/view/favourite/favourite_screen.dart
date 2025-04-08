@@ -1,8 +1,8 @@
 import 'package:eco_app/core/constants/app_assets.dart';
 import 'package:eco_app/core/constants/app_styles.dart';
-import 'package:eco_app/features/home/view_model/home_cubit.dart';
-import 'package:eco_app/features/home/widgets/favourite/custom_empty_favourites.dart';
-import 'package:eco_app/features/home/widgets/favourite/custom_favourite_card.dart';
+import 'package:eco_app/features/main_tabs/view_model/home_cubit.dart';
+import 'package:eco_app/features/main_tabs/widgets/favourite/custom_empty_favourites.dart';
+import 'package:eco_app/features/main_tabs/widgets/favourite/custom_favourite_card.dart';
 import 'package:eco_app/features/product/view_model/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: false, // This removes the back arrow
       backgroundColor: Colors.transparent,
-      title: const Text('E-Commerce'),
+      title: const Text('E-Cloud'),
       bottom: PreferredSize(
         preferredSize: Size(100.w, 60.h),
         child: Padding(
@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             children: [
               Expanded(
-                child: TextFormField(
+                child: TextField(
                   cursorColor: AppColors.primaryColor,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -78,6 +78,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(152.h);
+  Size get preferredSize => Size.fromHeight(155.h);
 
 }

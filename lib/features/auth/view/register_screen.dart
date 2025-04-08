@@ -29,9 +29,19 @@ class RegisterScreen extends StatelessWidget {
   builder: (context, state) {
     var cubit = AuthCubit.get(context);
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
+      // backgroundColor: AppColors.primaryColor,
 
-      body: SafeArea(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              AppColors.primaryColor.withOpacity(0.1),
+              AppColors.secondaryColor,
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: SingleChildScrollView(
@@ -42,15 +52,18 @@ class RegisterScreen extends StatelessWidget {
                 Center(
                     child: Image.asset(
                       AppAssets.logo,
-                      height: 85.h,
+                      height: 240.h,
+                      width: 240.h,
                     )),
                 SizedBox(
                   height: 50.h,
                 ),
-        
+
                 Text(
                   'User Name',
-                  style: AppStyles.medium18TextStyle(),
+                   style: AppStyles.medium18TextStyle(
+                          color: AppColors.primaryColor
+                      ),
                 ),
                 SizedBox(
                   height: 24.h,
@@ -63,11 +76,13 @@ class RegisterScreen extends StatelessWidget {
                 SizedBox(
                   height: 30.h,
                 ),
-        
-        
+
+
                 Text(
                   'Mobile Number',
-                  style: AppStyles.medium18TextStyle(),
+                   style: AppStyles.medium18TextStyle(
+                          color: AppColors.primaryColor
+                      ),
                 ),
                 SizedBox(
                   height: 24.h,
@@ -80,11 +95,13 @@ class RegisterScreen extends StatelessWidget {
                 SizedBox(
                   height: 30.h,
                 ),
-        
-        
+
+
                 Text(
                   'E-mail address',
-                  style: AppStyles.medium18TextStyle(),
+                   style: AppStyles.medium18TextStyle(
+                          color: AppColors.primaryColor
+                      ),
                 ),
                 SizedBox(
                   height: 24.h,
@@ -97,10 +114,12 @@ class RegisterScreen extends StatelessWidget {
                 SizedBox(
                   height: 30.h,
                 ),
-        
+
                 Text(
                   'Password',
-                  style: AppStyles.medium18TextStyle(),
+                   style: AppStyles.medium18TextStyle(
+                          color: AppColors.primaryColor
+                      ),
                 ),
                 SizedBox(
                   height: 24.h,
@@ -108,7 +127,7 @@ class RegisterScreen extends StatelessWidget {
                 CustomTextField(
                   hintText: 'enter your password',
                   isPassword: cubit.isVisible,
-                  suffixIcon: cubit.isVisible ? Icons.visibility : Icons.remove_red_eye_outlined,
+                  suffixIcon: cubit.isVisible ? Icons.visibility_off_sharp : Icons.visibility,
                   suffixIconOnPress: () {
                     cubit.changeVisibility();
                   },
@@ -121,7 +140,9 @@ class RegisterScreen extends StatelessWidget {
 
                 Text(
                   'Confirm Password',
-                  style: AppStyles.medium18TextStyle(),
+                   style: AppStyles.medium18TextStyle(
+                          color: AppColors.primaryColor
+                      ),
                 ),
                 SizedBox(
                   height: 24.h,
@@ -129,6 +150,11 @@ class RegisterScreen extends StatelessWidget {
                 CustomTextField(
                   hintText: 'Confirm Your Password',
                   controller: cubit.confirmPasswordController,
+                  isPassword: cubit.isConfirmPasswordVisible,
+                  suffixIcon: cubit.isConfirmPasswordVisible ? Icons.visibility_off_sharp : Icons.visibility,
+                  suffixIconOnPress: () {
+                    cubit.changeConfirmPasswordVisibility();
+                  },
                 ),
 
                 SizedBox(
@@ -147,7 +173,9 @@ class RegisterScreen extends StatelessWidget {
                     },
                   ),
                 ),
-
+                SizedBox(
+                  height: 50.h,
+                ),
 
               ],
             ),
