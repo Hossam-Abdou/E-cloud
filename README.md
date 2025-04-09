@@ -1,16 +1,27 @@
-# eco_app
+🌟 E-cloud - Flutter E-commerce App
+Flutter
+Dart
 
-A new Flutter project.
+E-cloud is a responsive e-commerce app built with Flutter , designed to provide a seamless shopping experience. It includes intuitive categories/subcategories, add-to-cart functionality, wishlist saving, and smooth navigation between product listings, detailed views, and checkout preparation.
 
-## Getting Started
+🌟 Features
+Product Catalog : A clean and organized catalog with categories and subcategories.
+Add-to-Cart Functionality : Users can easily add products to their cart.
+Wishlist Saving : Save favorite products for future reference.
+Smooth Navigation : Seamless transitions between product listings, detailed views, and checkout preparation.
+Responsive Design : Fully responsive layout using ScreenUtil for compatibility across multiple screen sizes.
 
-This project is a starting point for a Flutter application.
+💻 Technologies Used
+Flutter : Cross-platform app development framework.
+Dart : Programming language for Flutter.
+MVVM Architecture : Clean and scalable architecture pattern.
+Cubit : State management solution for handling app states.
+Dio : HTTP client for REST API integration.
+ScreenUtil : Ensures responsive design across different screen sizes.
+Error Handling : Implements robust error handling for API calls.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+🏗️ Architecture
+The app follows the MVVM (Model-View-ViewModel) architecture pattern:
+Model : Represents the data layer (e.g., product models, API responses).
+View : UI components (e.g., product list, cart screen).
+ViewModel : Manages the logic and state of the app using Cubit .
